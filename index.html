@@ -37,6 +37,8 @@
 
     <button id="calculate-btn">Aprēķināt vērtējumu</button>
     <p id="result"></p>
+    <br />
+    <ul id="history"></ul>
     <script>
       const calculateBtn = document.getElementById("calculate-btn");
       const nameInput = document.getElementById("name");
@@ -44,6 +46,7 @@
       const pointsInput = document.getElementById("points");
       const gradingSchemeSelect = document.getElementById("grading-scheme");
       const resultDiv = document.getElementById("result");
+      const history = document.getElementById("history");
 
       function handleButtonClick() {
         const name = nameInput.value;
@@ -56,7 +59,9 @@
         if (errors.length > 0) {
           resultDiv.innerHTML = errors.join();
         } else {
-          resultDiv.innerHTML = calcGrade(gradingScheme, points, maxPoints);
+          let calculated = calcGrade(gradingScheme, points, maxPoints);
+          resultDiv.innerHTML = calculated;
+          history.innerHTML += `<li> ${calculated} </li>`;
         }
       }
       // Validate inputs
