@@ -64,26 +64,29 @@
         let errors = [];
         if (!name || isNaN(points) || isNaN(maxPoints) || maxPoints <= 0) {
           errors.push("Lūdzu, aizpildiet visus laukus pareizi.");
+          return errors;
         }
         if (points < 0 || points > maxPoints) {
           errors.push("Iegūtie punkti nedrīkst pārsniegt maksimālos punktus.");
+          return errors;
         }
         return [];
       }
       function calcGrade(gradingScheme, points, maxPoints) {
+        const percentage = (points / maxPoints) * 100;
+
         if (gradingScheme === "percentage") {
-          const percentage = (points / maxPoints) * 100;
           return (grade = `Jūsu procentuālā vērtība ir: ${percentage.toFixed(
             2
           )}%`);
         } else if (gradingScheme === "letter") {
-          if (points >= 90) {
+          if (percentage >= 90) {
             return (grade = "Jūsu burtu vērtējums ir: A");
-          } else if (points >= 80) {
+          } else if (percentage >= 80) {
             return (grade = "Jūsu burtu vērtējums ir: B");
-          } else if (points >= 70) {
+          } else if (percentage >= 70) {
             return (grade = "Jūsu burtu vērtējums ir: C");
-          } else if (points >= 60) {
+          } else if (percentage >= 60) {
             return (grade = "Jūsu burtu vērtējums ir: D");
           } else {
             return (grade = "Jūsu burtu vērtējums ir: F");
